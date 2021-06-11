@@ -70,3 +70,12 @@ a{
 a.active{
   font-weight: bold;
 }
+
+.canvas{
+  max-width: 100%;
+}
+
+.canvas_wrapper{
+  max-width: 45%;
+  max-height:600px;
+}

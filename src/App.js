@@ -1,7 +1,7 @@
 import './App.css';
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { Route, NavLink, Switch, useParams } from 'react-router-dom';
+import { Route, NavLink, Switch } from 'react-router-dom';
 
 import {
   FirestoreCollection,
@@ -11,7 +11,7 @@ import {
 import MatchTable from './components/MatchTable';
 import ShiaijoGrid from './components/ShiaijoGrid';
 import NotFound from './components/NotFound';
-import Shiaijo from './components/Shiaijo';
+import ShiaijoOverlay from './components/ShiaijoOverlay';
 
 const config = {
   apiKey: "AIzaSyB1_TKg8YzkQrAvWncBJC366xIAZd0ksZc",
@@ -24,9 +24,7 @@ const config = {
 
 
 function App() {
-  const {id} = useParams()
-  const areaMap = {A: 0, B: 1, C: 2,D: 3}
-  const areaId = areaMap[id] ?? 0;
+  const areaId = 0
 
   return (
     <FirestoreProvider {...config} firebase={firebase}>
@@ -52,12 +50,16 @@ function App() {
                 </div>
               </Route>
 
+              <Route path="/" exact="true">
+                <ShiaijoGrid matches={data.value}></ShiaijoGrid>
+              </Route>
+
               <Route path="/overlays">
                 <ShiaijoGrid matches={data.value}></ShiaijoGrid>
               </Route>
 
               <Route path="/shiaijo/:id">
-                {data.value && <Shiaijo data={data.value[areaId]}></Shiaijo>}
+                <ShiaijoOverlay matches={data.value}></ShiaijoOverlay>
               </Route>
 
               <Route path="*" exact>
