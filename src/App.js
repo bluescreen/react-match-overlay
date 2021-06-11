@@ -1,4 +1,5 @@
 import './App.css';
+import config from './config';
 import firebase from "firebase/app";
 import "firebase/firestore";
 import { Route, NavLink, Switch } from 'react-router-dom';
@@ -12,16 +13,6 @@ import MatchTable from './components/MatchTable';
 import ShiaijoGrid from './components/ShiaijoGrid';
 import NotFound from './components/NotFound';
 import ShiaijoOverlay from './components/ShiaijoOverlay';
-
-const config = {
-  apiKey: "AIzaSyB1_TKg8YzkQrAvWncBJC366xIAZd0ksZc",
-  authDomain: "ekc-stream.firebaseapp.com",
-  projectId: "ekc-stream",
-  storageBucket: "ekc-stream.appspot.com",
-  messagingSenderId: "4117648448",
-  appId: "1:4117648448:web:ed2bb47a243a52473bfba5"
-};
-
 
 function App() {
   const areaId = 0
