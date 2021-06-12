@@ -24,7 +24,7 @@ const MatchTable = (props) => {
             </thead>
             <tbody>
                 {props.matches && props.matches.map((row, i) => (
-                    <tr key={i} onClick={(e) => onRowClick(e, row.Shiaijo)}>
+                    <tr className="match-table__row" key={i} onClick={(e) => onRowClick(e, row.Shiaijo)}>
                         <td>{row.Shiaijo}</td>
                         <td>{row.NumberTareWhite}</td>
                         <td>{row.NameTareWhite}</td>
