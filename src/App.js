@@ -13,23 +13,25 @@ import MatchTable from './components/MatchTable';
 import ShiaijoGrid from './components/ShiaijoGrid';
 import NotFound from './components/NotFound';
 import ShiaijoOverlay from './components/ShiaijoOverlay';
+import { BrowserRouter } from 'react-router-dom';
+
 
 function App() {
   const areaId = 0
 
   return (
     <FirestoreProvider {...config} firebase={firebase}>
+      <BrowserRouter>
+        <nav className="nav nav-pills nav-justified m-4">
+          <NavLink className="nav-item nav-link" to="/table">Tabelle</NavLink>
+          <NavLink className="nav-item nav-link" to="/overlays">Übersicht</NavLink>
+          <NavLink className="nav-item nav-link" to="/shiaijo/A">A</NavLink>
+          <NavLink className="nav-item nav-link" to="/shiaijo/B">B</NavLink>
+          <NavLink className="nav-item nav-link" to="/shiaijo/C">C</NavLink>
+          <NavLink className="nav-item nav-link" to="/shiaijo/D">D</NavLink>
+        </nav>
 
-      <nav class="nav nav-pills nav-justified m-4">
-        <NavLink className="nav-item nav-link" to="/table">Tabelle</NavLink>
-        <NavLink className="nav-item nav-link" to="/overlays">Übersicht</NavLink>
-        <NavLink className="nav-item nav-link" to="/shiaijo/A">A</NavLink>
-        <NavLink className="nav-item nav-link" to="/shiaijo/B">B</NavLink>
-        <NavLink className="nav-item nav-link" to="/shiaijo/C">C</NavLink>
-        <NavLink className="nav-item nav-link" to="/shiaijo/D">D</NavLink>
-      </nav>
-
-      <div className="">
+        <div className="">
         <FirestoreCollection path={"matches"}>
 
           {(data) => (
@@ -41,7 +43,7 @@ function App() {
                 </div>
               </Route>
 
-              <Route path="/" exact="true">
+              <Route path="/" exact>
                 <ShiaijoGrid matches={data.value}></ShiaijoGrid>
               </Route>
 
@@ -60,7 +62,7 @@ function App() {
           )}
         </FirestoreCollection>
       </div>
-
+      </BrowserRouter>
     </FirestoreProvider>
   );
 }

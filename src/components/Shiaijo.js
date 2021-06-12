@@ -68,7 +68,7 @@ const Shiaijo = (props) => {
 
     return (
         <div>
-            <div class="" ref={wrapper}>
+            <div className="" ref={wrapper}>
                 {<canvas id="canvas1" ref={canvasRef} className="canvas shiaijo resizeable mt-4" width="960" height="540"></canvas>}
             </div>
         </div>

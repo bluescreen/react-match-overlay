@@ -15,7 +15,7 @@ const ShiaijoGrid = (props) => {
     return (
         <div className="d-flex flex-wrap">
             { props.matches && props.matches.map((match)=> 
-            <div class="canvas_wrapper" onClick={(e) => onShiaijoClick(e, match.Shiaijo)}>
+            <div className="canvas_wrapper" onClick={(e) => onShiaijoClick(e, match.Shiaijo)}>
                 <Shiaijo data={match}></Shiaijo>
             </div>
             )}
