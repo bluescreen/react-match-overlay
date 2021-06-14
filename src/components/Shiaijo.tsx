@@ -1,9 +1,10 @@
 import { TextConfig } from "konva/lib/shapes/Text";
 import { useEffect, useState, createRef, useRef } from "react";
-import { Stage, Layer, Text, Image, Circle } from 'react-konva';
+import { Stage, Layer, Text, Image, Circle, RegularPolygon } from 'react-konva';
 import { useResizeDetector } from 'react-resize-detector';
 
 import Match from '../models/Match'
+import Ippons from "./Ippons";
 
 const origWidth = 960;
 const origHeight = 540;
@@ -30,14 +31,17 @@ const Shiaijo = (props: { data: Match }) => {
 
     const offsetX = 180 * stageWidth / origWidth;
     const numberOffsetX = 40 * stageWidth / origWidth;
-    const offsetY = (overlayHeight / 2)-10;
+    const offsetY = (overlayHeight / 2) - 10;
 
-    const fontSizeName = 25 * stageHeight/origHeight;
-    const fontSizeNumber = (20 * stageHeight / origHeight) + 5;
-    const ipponWidth = 35 * stageWidth / origWidth;
+    const ratioX = stageWidth / origWidth;
 
+    const fontSizeName = 25 * stageWidth / origWidth;
+    const fontSizeNumber = (20 * stageWidth / origWidth) + 5;
+    const ipponWidth = 25 * stageWidth / origWidth;
+    const ipponPaddingX = 12 * stageWidth / origWidth
+    const ipponBorder = 3 * stageWidth / origWidth
+    const ipponFontSize = 18 * stageWidth / origWidth
 
-    
     const imageProps = {
         x: 0,
         y: (height ?? 0) - overlayHeight,
@@ -60,29 +64,35 @@ const Shiaijo = (props: { data: Match }) => {
 
     const middle = stageWidth / 2;
     const ipponY = stageHeight - offsetY;
+    const ipponParams = {
+        fill: "#000",
+        fontSize: ipponFontSize,
+        fontStyle: "bold",
+        width: ipponWidth,
+        height: ipponWidth + (ipponWidth / 15),
+        align: "center",
+        verticalAlign: "middle"
+    }
 
-    const ipponsWhite: TextConfig[] = [data.IpponWhite1, data.IpponWhite2, data.HansokuWhite].map((hit,i) => {
+    const ipponsWhite: TextConfig[] = [data.IpponWhite1, data.IpponWhite2, data.HansokuWhite].filter((hit) => hit).map((hit, i) => {
         return {
-            x:  middle - (ipponWidth * (i+1)),
+            x: middle - ((ipponWidth * i) + ipponWidth + (i * ipponPaddingX) + ipponPaddingX),
             y: ipponY,
             text: hit,
-            fill: "#000",
-            fontSize: 20
+            ...ipponParams
         }
     });
-    const ipponsRed: TextConfig[] = [data.IpponRed1, data.IpponRed2, data.HansokuRed].map((hit,i) => {
+    const ipponsRed: TextConfig[] = [data.IpponRed1, data.IpponRed2, data.HansokuRed].filter((hit) => hit).map((hit, i) => {
         return {
-            x: middle + (ipponWidth* (i+1)),
+            x: middle + (ipponWidth * i) + (i * ipponPaddingX) + ipponPaddingX,
             y: ipponY,
             text: hit,
-            fill: "#000",
-            fontSize: 20
-
+            ...ipponParams
         }
     });
 
     const texts: TextConfig[] = [
-        { text:data.Shiaijo, x: 50, y: 50, fontSize: 50, fontStyle:"bold" },
+        { text: data.Shiaijo, x: 50, y: 50, fontSize: 50, fontStyle: "bold" },
 
         // RED
         {
@@ -92,20 +102,18 @@ const Shiaijo = (props: { data: Match }) => {
             fontSize: fontSizeName,
             fill: '#fff'
         },
-        
+
         {
             x: stageWidth - numberOffsetX - textNumberWidth,
             y: stageHeight - offsetY,
             text: data.NumberTareRed,
             fontSize: fontSizeNumber,
             fontStyle: "bold",
-            fill: '#fff'
+            fill: '#fff',
         },
-        
-        
-        // WHITE
-        
 
+
+        // WHITE
         {
             x: offsetX,
             y: stageHeight - offsetY,
@@ -122,23 +130,16 @@ const Shiaijo = (props: { data: Match }) => {
             fill: '#fff'
         },
     ];
-     
-
 
     return (
         <div className="h-100" ref={targetRef}>
             <Stage width={width} height={height}>
                 <Layer ref={konvaLayer}>
-                    <Image {...imageProps}></Image> 
+                    <Image {...imageProps}></Image>
 
                     {texts.map((textProps, i) => <Text key={i} {...textProps} ></Text>)}
-
-
-                    {ipponsWhite.map((textProps, i) => <Text key={i} {...textProps} ></Text>)}
-                    {ipponsRed.map((textProps, i) => <>
-                        <Circle x={textProps.x} y={textProps.y} width={ipponWidth} height={ipponWidth} fill="#fff"></Circle><Text key={i} {...textProps} ></Text>
-                    </>)}
-
+                    <Ippons items={ipponsWhite} width={ipponWidth} border={ipponBorder}></Ippons>
+                    <Ippons items={ipponsRed} width={ipponWidth} border={ipponBorder}></Ippons>
                 </Layer>
             </Stage>
         </div>

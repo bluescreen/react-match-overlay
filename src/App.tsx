@@ -2,7 +2,7 @@ import './App.css';
 import config from './config';
 import firebase from "firebase/app";
 import "firebase/firestore";
-import { Route, NavLink, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 
 import {
   FirestoreCollection,
@@ -18,11 +18,14 @@ import Navigation from './components/Navigation';
 
 
 function App() {
+
+  const showNav = !window.location.href.match(/shiaijo/)
+
   return (
     <FirestoreProvider {...config} firebase={firebase}>
       <BrowserRouter>
         <div className="d-flex flex-column h-100">
-          <Navigation></Navigation>
+          {showNav && <Navigation></Navigation>}
 
           <div className="h-100">
             <FirestoreCollection path={"matches"}>
