@@ -25,7 +25,7 @@ const StreamPreview = () => {
   };
 
   return (
-    <div className="d-flex flex-wrap h-100">
+    <div className="d-flex flex-wrap h-100 bg-black">
       {streams && streams.map((stream,i) => 
         <div key={i} ref={youtubeRef} className="canvas-wrapper-grid">
           <YouTube videoId={stream.videoId} opts={playerOpts}></YouTube>
