@@ -10,6 +10,7 @@ import {
 } from "@react-firebase/firestore";
 
 import MatchTable from './components/MatchTable';
+import StreamPreview from './components/StreamPreview';
 import ShiaijoGrid from './components/ShiaijoGrid';
 import NotFound from './components/NotFound';
 import ShiaijoOverlay from './components/ShiaijoOverlay';
@@ -37,6 +38,10 @@ function App() {
                       <h1 className="my-4">Active Matches</h1>
                       <MatchTable matches={data.value}></MatchTable>
                     </div>
+                  </Route>
+
+                  <Route path="/preview">
+                    <StreamPreview></StreamPreview>
                   </Route>
 
                   <Route path="/" exact>

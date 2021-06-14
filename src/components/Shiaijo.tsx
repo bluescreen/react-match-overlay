@@ -4,13 +4,14 @@ import { Stage, Layer, Text, Image, Circle,Rect } from 'react-konva';
 import { useResizeDetector } from 'react-resize-detector';
 
 import Match from '../models/Match'
+import { TeamMatch } from "../models/TeamMatch";
 import Ippons from "./Ippons";
 
-const origWidth = 960;
+const origWidth = 1200;
 const origHeight = 540;
 
 
-const Shiaijo = (props: { data: Match }) => {
+const Shiaijo = (props: { data: Match|TeamMatch }) => {
     const targetRef = createRef<HTMLDivElement>()
     const [image, setImage] = useState()
     const data = props.data;
@@ -63,7 +64,6 @@ const Shiaijo = (props: { data: Match }) => {
         g.font = fontSizeName + 'px sans-serif';
         textNameWidth = g.measureText(data.NameTareRed).width
         
-
         g.font = fontSizeNumber + 'px bold sans-serif';
         textNumberWidth = g.measureText(data.NumberTareRed).width
     }
@@ -144,7 +144,7 @@ const Shiaijo = (props: { data: Match }) => {
             fontStyle: "bold",
             fill: '#fff',
             ...shadowParams
-        },
+        }
     ];
 
    
