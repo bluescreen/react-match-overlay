@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import { Stage, Layer, Text,Image } from 'react-konva';
+import Match from '../models/Match'
 
 
-const Shiaijo = (props) => {
+const Shiaijo = (props: {data: Match}) => {
     const canvasRef = useRef(null);
     const wrapper = useRef(null);
     const [image, setImage] = useState()

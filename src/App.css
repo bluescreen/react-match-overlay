@@ -79,3 +79,7 @@ a.active{
   max-width: 45%;
   max-height:600px;
 }
+
+.row-auto{
+  width:20%;
+}

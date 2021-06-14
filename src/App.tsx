@@ -17,8 +17,6 @@ import { BrowserRouter } from 'react-router-dom';
 
 
 function App() {
-  const areaId = 0
-
   return (
     <FirestoreProvider {...config} firebase={firebase}>
       <BrowserRouter>

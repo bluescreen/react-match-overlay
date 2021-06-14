@@ -1,13 +1,12 @@
 import Shiaijo from './Shiaijo';
 import { useHistory} from 'react-router-dom';
+import Match from '../models/Match';
 
 
-const ShiaijoGrid = (props) => {
-
+const ShiaijoGrid = (props: {matches: Match[]}) => {
     const history = useHistory();
 
-
-    const onShiaijoClick = (e, shiaijo) => {
+    const onShiaijoClick = (e: React.MouseEvent, shiaijo: string) => {
         e.preventDefault();
         history.push('/shiaijo/'+shiaijo)
     }

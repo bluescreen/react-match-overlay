@@ -1,12 +1,13 @@
 import { useHistory} from 'react-router-dom';
 import Score from './Score'
+import Match from '../models/Match'
 
 
-const MatchTable = (props) => {
+const MatchTable = (props: {matches: Match[]}) => {
     const history = useHistory();
 
 
-    const onRowClick = (e, shiaijo) => {
+    const onRowClick = (e: MouseEvent, shiaijo: string) => {
         e.preventDefault();
         history.push('/shiaijo/'+shiaijo)
     }
@@ -16,15 +17,15 @@ const MatchTable = (props) => {
             <thead>
                 <tr>
                     <th>#</th>
-                    <th width="20%" colSpan="2">Name White</th>
-                    <th  width="20%" className="text-end">Points White</th>
+                    <th className="row-auto" colSpan={2}>Name White</th>
+                    <th className="row-auto text-end">Points White</th>
                     <th></th>
-                    <th  width="20%">Points Red</th>
-                    <th width="20%" colSpan="2">Name Red</th>
+                    <th  className="row-auto"   >Points Red</th>
+                    <th  className="row-auto"  colSpan={2}>Name Red</th>
                 </tr>
             </thead>
             <tbody>
-                {props.matches && props.matches.map((row, i) => (
+                {props.matches && props.matches.map((row: Match, i: number) => (
                     <tr className="match-table__row" key={i} onClick={(e) => onRowClick(e, row.Shiaijo)}>
                         <td>{row.Shiaijo}</td>
                         <td>{row.NumberTareWhite}</td>
