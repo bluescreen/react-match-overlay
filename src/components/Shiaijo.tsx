@@ -1,11 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { Stage, Layer, Text,Image } from 'react-konva';
 import Match from '../models/Match'
 
 
 const Shiaijo = (props: {data: Match}) => {
-    const canvasRef = useRef(null);
-    const wrapper = useRef(null);
     const [image, setImage] = useState()
     const data = props.data;
     /*
@@ -70,22 +68,29 @@ const Shiaijo = (props: {data: Match}) => {
     }, [data]);*/
 
     useEffect(() => {
-        const imageObj = new window.Image();
+        const imageObj: HTMLImageElement = new window.Image();
         imageObj.src = "/trans_overlay.png";
         imageObj.onload = () => {
-            setImage(imageObj)
+            setImage(imageObj as any)
         }
     }, [])
 
-    const stageWidth = 960;
-    const stageHeight = 540;
+    const stageWidth:number = 960;
+    const stageHeight:number = 540;
+
+    const imageProps = {
+        x: 0,
+        y: 0,
+        image: image,
+        width: stageWidth
+    }
 
 
     return (
         <Stage width={stageWidth} height={stageHeight}>
             <Layer>
-                <Text text={data.Shiaijo} x="50" y="50" fontSize="30" />
-                <Image image={image} x="0" y="0" width={stageWidth}></Image>
+                <Text text={data.Shiaijo} x={50} y={50} fontSize={30} />
+                <Image {...imageProps}></Image>
             </Layer>
         </Stage>
     )

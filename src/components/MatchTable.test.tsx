@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import MatchTable from './MatchTable';
+import Match from '../models/Match';
 
-const fixtures = [{
+const fixtures: Match[] = [{
     Shiaijo: 'A',
     NameTareWhite: 'Bob',
     NameTareRed: 'John',
@@ -26,7 +27,8 @@ jest.mock('react-router-dom', () => ({
 
 describe("MatchTable", () => {
     test('renders match table', () => {
-        render(<MatchTable />);
+
+        render(<MatchTable matches={[]}/>);
         expect(screen.getByText(/Name White/i)).toBeInTheDocument();
         expect(screen.getByText(/Name Red/i)).toBeInTheDocument();
         expect(screen.getByText(/Points Red/i)).toBeInTheDocument();
@@ -44,11 +46,9 @@ describe("MatchTable", () => {
     });
 
     test('click a row', () => {
-
-
         const { container } = render(<MatchTable matches={fixtures} />);
 
-        const firstRow = container.querySelectorAll('tr.match-table__row')[0];
+        const firstRow = container.querySelectorAll('tr.match-table__row')[0] as Element;
         firstRow.click()
         expect(mockHistoryPush).toHaveBeenCalledWith('/shiaijo/A');
 

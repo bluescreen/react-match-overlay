@@ -1,18 +1,6 @@
-export interface TeamMatch {
-    Pool                :string,
-	Fight               :string,
-	Shiaijo             :string,
-	NumberTareWhite     :string,
-	NameTareWhite       :string,
-	HansokuWhite        :string,
-	IpponWhite2         :string,
-	IpponWhite1         :string,
-	EnchoOrHikiwake     :string,
-	IpponRed1           :string,
-	IpponRed2           :string,
-	HansokuRed          :string,
-	NumberTareRed       :string,
-	NameTareRed         :string,
+import Match from './Match'
+
+export interface TeamMatch extends Match {
 	FightNumber         :string,
 	TeamWhite           :string,
 	WinsWhite           :string,

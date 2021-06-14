@@ -6,8 +6,7 @@ import Match from '../models/Match'
 const MatchTable = (props: {matches: Match[]}) => {
     const history = useHistory();
 
-
-    const onRowClick = (e: MouseEvent, shiaijo: string) => {
+    const onRowClick = (e: any, shiaijo: string) => {
         e.preventDefault();
         history.push('/shiaijo/'+shiaijo)
     }
