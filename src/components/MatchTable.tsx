@@ -16,6 +16,8 @@ const MatchTable = (props: {matches: Match[]}) => {
             <thead>
                 <tr>
                     <th>#</th>
+                    <th></th>
+                    <th></th>
                     <th className="row-auto" colSpan={2}>Name White</th>
                     <th className="row-auto text-end">Points White</th>
                     <th></th>
@@ -27,6 +29,8 @@ const MatchTable = (props: {matches: Match[]}) => {
                 {props.matches && props.matches.map((row: Match, i: number) => (
                     <tr className="match-table__row" key={i} onClick={(e) => onRowClick(e, row.Shiaijo)}>
                         <td>{row.Shiaijo}</td>
+                        <td>{row.Fight}</td>
+                        <td>{row.Pool}</td>
                         <td>{row.NumberTareWhite}</td>
                         <td>{row.NameTareWhite}</td>
                         <td>

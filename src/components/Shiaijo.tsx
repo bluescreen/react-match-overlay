@@ -1,6 +1,6 @@
 import { TextConfig } from "konva/lib/shapes/Text";
 import { useEffect, useState, createRef, useRef } from "react";
-import { Stage, Layer, Text, Image, Circle } from 'react-konva';
+import { Stage, Layer, Text, Image, Circle,Rect } from 'react-konva';
 import { useResizeDetector } from 'react-resize-detector';
 
 import Match from '../models/Match'
@@ -44,8 +44,8 @@ const Shiaijo = (props: { data: Match }) => {
     const ipponBorder = 3 * ratioX
     const ipponFontSize = 22 * ratioX
 
-    const shiaijoCircleWidth = 40*  ratioX
-    const shiaijoCirclePadding = 20*  ratioX
+    const shiaijoCircleWidth = 35*  ratioX
+    const shiaijoCirclePadding = 10*  ratioX
 
     const imageProps = {
         x: 0,
@@ -97,6 +97,13 @@ const Shiaijo = (props: { data: Match }) => {
         }
     });
 
+    const shadowParams = {
+        shadowColor: 'black',
+            shadowBlur: 0.5,
+            shadowOffset: { x: 1.5, y: 1.5 },
+            shadowOpacity: 0.5
+    }
+
     const texts: TextConfig[] = [
 
         // RED
@@ -105,7 +112,8 @@ const Shiaijo = (props: { data: Match }) => {
             y: stageHeight - offsetY,
             text: data.NameTareRed,
             fontSize: fontSizeName,
-            fill: '#fff'
+            fill: '#fff',
+            ...shadowParams
         },
 
         {
@@ -115,6 +123,7 @@ const Shiaijo = (props: { data: Match }) => {
             fontSize: fontSizeNumber,
             fontStyle: "bold",
             fill: '#fff',
+            ...shadowParams
         },
 
 
@@ -124,7 +133,8 @@ const Shiaijo = (props: { data: Match }) => {
             y: stageHeight - offsetY,
             text: data.NameTareWhite,
             fontSize: fontSizeName,
-            fill: '#fff'
+            fill: '#fff',
+            ...shadowParams
         },
         {
             x: numberOffsetX,
@@ -132,31 +142,42 @@ const Shiaijo = (props: { data: Match }) => {
             text: data.NumberTareWhite,
             fontSize: fontSizeNumber,
             fontStyle: "bold",
-            fill: '#fff'
+            fill: '#fff',
+            ...shadowParams
         },
     ];
 
+   
     return (
         <div className="h-100" ref={targetRef}>
             <Stage width={width} height={height}>
-                <Layer ref={konvaLayer}>
-                    <>
-                        <Circle x={stageWidth - shiaijoCirclePadding - shiaijoCircleWidth} y={shiaijoCirclePadding} width={shiaijoCircleWidth} height={shiaijoCircleWidth}
-                            fill="#fff" strokeWidth={3} stroke="#000"
-                            offsetX={-shiaijoCircleWidth / 2}
-                            offsetY={-shiaijoCircleWidth / 2}
-                            
-                        ></Circle>
-                        <Text text={data.Shiaijo} x={stageWidth - shiaijoCirclePadding - shiaijoCircleWidth}
-                            y={shiaijoCirclePadding+2} fontSize={shiaijoCircleWidth*0.8}
-                            width={shiaijoCircleWidth}
-                            height={shiaijoCircleWidth}
-                            align="center"
-                            verticalAlign="middle"
-                            fontStyle="bold"></Text>
-                    </>
-                    <Image {...imageProps}></Image>
+                <Layer>
+                    <Rect x={0} y={shiaijoCirclePadding} width={160*ratioX} height={30*ratioX} stroke="#000" strokeWidth={1} fill="#fff"></Rect>
+                    <Text fontSize={20*ratioX} x={shiaijoCirclePadding} y={shiaijoCirclePadding+5*ratioX} text={"Fight "+data.Fight}></Text>
+                    <Text fontSize={20*ratioX} x={shiaijoCirclePadding + 80*ratioX} y={shiaijoCirclePadding+5*ratioX} text={"Pool "+data.Pool}></Text>
+                </Layer>
 
+                <Layer>
+                    <Circle x={stageWidth - shiaijoCirclePadding - shiaijoCircleWidth} y={shiaijoCirclePadding} width={shiaijoCircleWidth} height={shiaijoCircleWidth}
+                        fill="#fff" strokeWidth={3} stroke="#000"
+                        offsetX={-shiaijoCircleWidth / 2}
+                        offsetY={-shiaijoCircleWidth / 2}
+                        
+                    ></Circle>
+                    <Text text={data.Shiaijo} x={stageWidth - shiaijoCirclePadding - shiaijoCircleWidth}
+                        y={shiaijoCirclePadding+2} fontSize={shiaijoCircleWidth*0.8}
+                        width={shiaijoCircleWidth}
+                        height={shiaijoCircleWidth}
+                        align="center"
+                        verticalAlign="middle"
+                        fontStyle="bold"></Text>
+                </Layer>
+
+                <Layer ref={konvaLayer}>
+                    <Image {...imageProps}></Image>
+                </Layer>
+
+                <Layer>
                     {texts.map((textProps, i) => <Text key={i} {...textProps} ></Text>)}
                     <Ippons items={ipponsWhite} width={ipponWidth} border={ipponBorder}></Ippons>
                     <Ippons items={ipponsRed} width={ipponWidth} border={ipponBorder}></Ippons>
