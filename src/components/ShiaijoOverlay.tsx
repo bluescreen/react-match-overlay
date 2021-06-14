@@ -9,7 +9,7 @@ const ShiaijoOverlay = (props: {matches: Match[]}) => {
 
     return (
         <div className="canvas-wrapper-full">
-            {data && <Shiaijo data={data[areaId]}></Shiaijo>}
+            {data && areaId < data.length && <Shiaijo data={data[areaId]}></Shiaijo>}
         </div>
     )
 }
