@@ -1,10 +1,13 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
+import { Stage, Layer, Text,Image } from 'react-konva';
+
 
 const Shiaijo = (props) => {
     const canvasRef = useRef(null);
     const wrapper = useRef(null);
+    const [image, setImage] = useState()
     const data = props.data;
-
+    /*
     useEffect(() => {
         
 
@@ -56,22 +59,34 @@ const Shiaijo = (props) => {
             g.fillText(data.NumberTareWhite, numberOffsetX, height - offsetY)
             g.fillText(data.NumberTareRed, width - numberOffsetX -numberWidthRed, height - offsetY)
 
-            const image = new Image;
-            image.src = "/trans_overlay.png";
+            
             image.onload = () => {
                 g.drawImage(image, 0, 0, width, height)
             }
         }
         renderOverlay()
         //window.addEventListener('resize', renderOverlay)
-    }, [data]);
+    }, [data]);*/
+
+    useEffect(() => {
+        const imageObj = new window.Image();
+        imageObj.src = "/trans_overlay.png";
+        imageObj.onload = () => {
+            setImage(imageObj)
+        }
+    }, [])
+
+    const stageWidth = 960;
+    const stageHeight = 540;
+
 
     return (
-        <div>
-            <div className="" ref={wrapper}>
-                {<canvas id="canvas1" ref={canvasRef} className="canvas shiaijo resizeable mt-4" width="960" height="540"></canvas>}
-            </div>
-        </div>
+        <Stage width={stageWidth} height={stageHeight}>
+            <Layer>
+                <Text text={data.Shiaijo} x="50" y="50" fontSize="30" />
+                <Image image={image} x="0" y="0" width={stageWidth}></Image>
+            </Layer>
+        </Stage>
     )
 }
 
