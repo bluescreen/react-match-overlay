@@ -71,11 +71,23 @@ a.active{
   font-weight: bold;
 }
 
-.canvas{
-  width: 100%;
-  height: 100%;
+.canvas-wrapper-grid{
+  width:50%;
+  border:1px solid #000;
+}
+
+.canvas-wrapper-full{
+  width:100%;
+  height:100%;
+  border:1px solid #000;
+  background: #eee;
 }
 
 .row-auto{
   width:20%;
+}
+
+html, body, #root {
+  height:100%;
+  margin:0;
 }
