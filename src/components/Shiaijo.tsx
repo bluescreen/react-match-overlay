@@ -8,7 +8,7 @@ import { TeamMatch } from "../models/TeamMatch";
 import Ippons from "./Ippons";
 
 const origWidth = 1200;
-const origHeight = 540;
+//const origHeight = 540;
 
 
 const Shiaijo = (props: { data: Match|TeamMatch }) => {
@@ -30,7 +30,7 @@ const Shiaijo = (props: { data: Match|TeamMatch }) => {
     const ratioX = stageWidth / origWidth;
 
 
-    const overlayHeight = 144;
+    const overlayHeight = 144*ratioX;
 
     const offsetX = 180 * ratioX;
     const numberOffsetX = 40 * ratioX;
@@ -53,6 +53,7 @@ const Shiaijo = (props: { data: Match|TeamMatch }) => {
         y: (height ?? 0) - overlayHeight,
         image: image,
         width: width,
+        height: overlayHeight
     }
 
     const konvaLayer = useRef<any>()
@@ -70,7 +71,7 @@ const Shiaijo = (props: { data: Match|TeamMatch }) => {
 
     const middle = stageWidth / 2;
     const ipponY = stageHeight - offsetY;
-    const ipponParams = {
+    const ipponParams:TextConfig = {
         fill: "#000",
         fontSize: ipponFontSize,
         fontStyle: "bold",

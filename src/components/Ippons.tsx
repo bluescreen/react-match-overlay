@@ -1,5 +1,5 @@
 import { TextConfig } from "konva/lib/shapes/Text"
-import { Circle, Rect, RegularPolygon, Text } from 'react-konva';
+import { Circle, RegularPolygon, Text } from 'react-konva';
 
 
 const Ippons = (props: { items: TextConfig[], width: number, border: number }) => {

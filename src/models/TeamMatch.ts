@@ -1,13 +1,13 @@
 import Match from './Match'
 
 export interface TeamMatch extends Match {
-	FightNumber         :string,
+	FightNumber         :number,
 	TeamWhite           :string,
-	WinsWhite           :string,
-	SetWhite            :string,
+	WinsWhite           :number,
+	SetWhite            :number,
 	TeamEnchoOrHikiwake :string,
-	SetRed              :string,
-	WinsRed             :string,
+	SetRed              :number,
+	WinsRed             :number,
 	TeamRed             :string,
 	Updated             :string,
 }

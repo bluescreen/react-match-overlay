@@ -15,6 +15,7 @@ const match: Match = {
   NameTareRed: 'John',
   NumberTareWhite: 'GER-1',
   NumberTareRed: 'BEL-1'
+  
 }
 
 describe("Shiaijo Overlay", () => {
