@@ -1,6 +1,6 @@
 import { TextConfig } from "konva/lib/shapes/Text";
 import { useEffect, useState, createRef, useRef } from "react";
-import { Stage, Layer, Text, Image, Circle, RegularPolygon } from 'react-konva';
+import { Stage, Layer, Text, Image, Circle } from 'react-konva';
 import { useResizeDetector } from 'react-resize-detector';
 
 import Match from '../models/Match'
@@ -26,21 +26,26 @@ const Shiaijo = (props: { data: Match }) => {
 
     const stageWidth = width ?? 0;
     const stageHeight = height ?? 0;
+    const ratioX = stageWidth / origWidth;
+
 
     const overlayHeight = 144;
 
-    const offsetX = 180 * stageWidth / origWidth;
-    const numberOffsetX = 40 * stageWidth / origWidth;
-    const offsetY = (overlayHeight / 2) - 10;
+    const offsetX = 180 * ratioX;
+    const numberOffsetX = 40 * ratioX;
+    const offsetY = (overlayHeight / 2);
 
-    const ratioX = stageWidth / origWidth;
 
-    const fontSizeName = 25 * stageWidth / origWidth;
-    const fontSizeNumber = (20 * stageWidth / origWidth) + 5;
-    const ipponWidth = 25 * stageWidth / origWidth;
-    const ipponPaddingX = 12 * stageWidth / origWidth
-    const ipponBorder = 3 * stageWidth / origWidth
-    const ipponFontSize = 18 * stageWidth / origWidth
+    const fontSizeName = 25 * ratioX;
+    const fontSizeNumber = (20 * ratioX) + 5;
+    
+    const ipponWidth = 30 * ratioX;
+    const ipponPaddingX = 8 * ratioX
+    const ipponBorder = 3 * ratioX
+    const ipponFontSize = 22 * ratioX
+
+    const shiaijoCircleWidth = 40*  ratioX
+    const shiaijoCirclePadding = 20*  ratioX
 
     const imageProps = {
         x: 0,
@@ -56,10 +61,11 @@ const Shiaijo = (props: { data: Match }) => {
     const g = konvaLayer.current?.getContext();
     if (g) {
         g.font = fontSizeName + 'px sans-serif';
-        textNameWidth = g.measureText(data.NameTareWhite).width
+        textNameWidth = g.measureText(data.NameTareRed).width
+        
 
         g.font = fontSizeNumber + 'px bold sans-serif';
-        textNumberWidth = g.measureText(data.NumberTareWhite).width
+        textNumberWidth = g.measureText(data.NumberTareRed).width
     }
 
     const middle = stageWidth / 2;
@@ -92,7 +98,6 @@ const Shiaijo = (props: { data: Match }) => {
     });
 
     const texts: TextConfig[] = [
-        { text: data.Shiaijo, x: 50, y: 50, fontSize: 50, fontStyle: "bold" },
 
         // RED
         {
@@ -135,6 +140,21 @@ const Shiaijo = (props: { data: Match }) => {
         <div className="h-100" ref={targetRef}>
             <Stage width={width} height={height}>
                 <Layer ref={konvaLayer}>
+                    <>
+                        <Circle x={stageWidth - shiaijoCirclePadding - shiaijoCircleWidth} y={shiaijoCirclePadding} width={shiaijoCircleWidth} height={shiaijoCircleWidth}
+                            fill="#fff" strokeWidth={3} stroke="#000"
+                            offsetX={-shiaijoCircleWidth / 2}
+                            offsetY={-shiaijoCircleWidth / 2}
+                            
+                        ></Circle>
+                        <Text text={data.Shiaijo} x={stageWidth - shiaijoCirclePadding - shiaijoCircleWidth}
+                            y={shiaijoCirclePadding+2} fontSize={shiaijoCircleWidth*0.8}
+                            width={shiaijoCircleWidth}
+                            height={shiaijoCircleWidth}
+                            align="center"
+                            verticalAlign="middle"
+                            fontStyle="bold"></Text>
+                    </>
                     <Image {...imageProps}></Image>
 
                     {texts.map((textProps, i) => <Text key={i} {...textProps} ></Text>)}
