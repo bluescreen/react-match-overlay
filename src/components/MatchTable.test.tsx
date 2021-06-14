@@ -48,7 +48,7 @@ describe("MatchTable", () => {
     test('click a row', () => {
         const { container } = render(<MatchTable matches={fixtures} />);
 
-        const firstRow = container.querySelectorAll('tr.match-table__row')[0] as Element;
+        const firstRow = container.querySelectorAll('tr.match-table__row')[0] as HTMLElement;
         firstRow.click()
         expect(mockHistoryPush).toHaveBeenCalledWith('/shiaijo/A');
 

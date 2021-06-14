@@ -8,7 +8,7 @@ const ShiaijoOverlay = (props: {matches: Match[]}) => {
     const areaId =  params.id.charCodeAt(0)- 65;
 
     return (
-        <div>
+        <div className="canvas_wrapper">
             {data && <Shiaijo data={data[areaId]}></Shiaijo>}
         </div>
     )

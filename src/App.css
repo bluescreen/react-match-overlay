@@ -72,12 +72,8 @@ a.active{
 }
 
 .canvas{
-  max-width: 100%;
-}
-
-.canvas_wrapper{
-  max-width: 45%;
-  max-height:600px;
+  width: 100%;
+  height: 100%;
 }
 
 .row-auto{
