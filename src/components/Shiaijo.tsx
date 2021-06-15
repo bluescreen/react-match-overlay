@@ -8,7 +8,7 @@ import { TeamMatch } from "../models/TeamMatch";
 import CircleText from "./CircleTest";
 import RoundedCorner from "./RoundedCorner";
 import Ippons from "./Ippons";
-import ISO from 'iso-3166-1';
+import { mapNumberToFlag } from "../helpers"
 
 const origWidth = 1200;
 //const origHeight = 540;
@@ -24,16 +24,7 @@ const Shiaijo = (props: { data: any }) => {
     const konvaLayer = useRef<any>()
     const data = props.data;
 
-    const mapNumberToFlag = (tareNumber: string) => {
-        const countryMatch = tareNumber.match(/.[A-Z]*/) ?? []
-        const countryId:string = countryMatch[0];
-
-        const entry = ISO.whereAlpha3(countryId);
-        const entryName = countryId == 'GER' ? 'de' : entry?.alpha2.toLowerCase()
-
-        return "/flags/big/"+entryName+".gif"
-    }
-
+   
     /*
     data.TeamRed = "Germany"
     data.TeamWhite = "Austria"

@@ -1,6 +1,7 @@
 import { useHistory} from 'react-router-dom';
 import Score from './Score'
 import Match from '../models/Match'
+import {mapNumberToFlag} from '../helpers'
 
 
 const MatchTable = (props: {matches: Match[]}) => {
@@ -18,11 +19,11 @@ const MatchTable = (props: {matches: Match[]}) => {
                     <th>#</th>
                     <th></th>
                     <th></th>
-                    <th className="row-auto" colSpan={2}>Name White</th>
+                    <th className="row-auto" colSpan={3}>Name White</th>
                     <th className="row-auto text-end">Points White</th>
                     <th></th>
                     <th  className="row-auto"   >Points Red</th>
-                    <th  className="row-auto"  colSpan={2}>Name Red</th>
+                    <th  className="row-auto"  colSpan={3}>Name Red</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,7 @@ const MatchTable = (props: {matches: Match[]}) => {
                         <td>{row.Shiaijo}</td>
                         <td>{row.Fight}</td>
                         <td>{row.Pool}</td>
+                        <td><img width={40} src={ mapNumberToFlag(row.NumberTareWhite, 'round', 'png')} /></td>
                         <td>{row.NumberTareWhite}</td>
                         <td>{row.NameTareWhite}</td>
                         <td>
@@ -41,6 +43,7 @@ const MatchTable = (props: {matches: Match[]}) => {
                             <Score hits={[row.IpponRed1, row.IpponRed2, row.HansokuRed]}></Score>
                         </td>
                         
+                        <td><img width={40} src={ mapNumberToFlag(row.NumberTareRed, 'round', 'png')} /></td>
                         <td>{row.NumberTareRed}</td>
                         <td>{row.NameTareRed}</td>  
                     </tr>
