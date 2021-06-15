@@ -5,17 +5,30 @@ import { useResizeDetector } from 'react-resize-detector';
 
 import Match from '../models/Match'
 import { TeamMatch } from "../models/TeamMatch";
+import CircleText from "./CircleTest";
+import RoundedCorner from "./RoundedCorner";
 import Ippons from "./Ippons";
 
 const origWidth = 1200;
 //const origHeight = 540;
 
 
-const Shiaijo = (props: { data: Match|TeamMatch }) => {
+const Shiaijo = (props: { data: any }) => {
+
     const targetRef = createRef<HTMLDivElement>()
-    const [image, setImage] = useState()
-    const data = props.data;
     const { width, height } = useResizeDetector({ targetRef });
+    const [image, setImage] = useState()
+    const konvaLayer = useRef<any>()
+    const data = props.data;
+
+    data.TeamRed = "Germany"
+    data.TeamWhite = "Austria"
+    data.FightNumber = 5;
+    data.SetWhite = 3;
+    data.WinsWhite = 1;
+    data.SetRed = 4;
+    data.WinsRed = 2;
+    data.TeamHikiwake = 1;
 
     useEffect(() => {
         const imageObj: HTMLImageElement = new window.Image();
@@ -27,25 +40,32 @@ const Shiaijo = (props: { data: Match|TeamMatch }) => {
 
     const stageWidth = width ?? 0;
     const stageHeight = height ?? 0;
+    const middle = stageWidth / 2;
     const ratioX = stageWidth / origWidth;
 
 
     const overlayHeight = 144*ratioX;
 
-    const offsetX = 180 * ratioX;
-    const numberOffsetX = 40 * ratioX;
-    const offsetY = (overlayHeight / 2);
+    const nameOffsetX = 220 * ratioX;
+    const numberOffsetX = 50 * ratioX;
+    const offsetY = 50 * ratioX;
 
 
     const fontSizeName = 25 * ratioX;
+    const fontSizeTeam = 25 * ratioX;
     const fontSizeNumber = (20 * ratioX) + 5;
     
     const ipponWidth = 30 * ratioX;
-    const ipponPaddingX = 8 * ratioX
+    const ipponPaddingX = 12 * ratioX
     const ipponBorder = 3 * ratioX
     const ipponFontSize = 22 * ratioX
+    const ippponOffsetY = 45 * ratioX;
+    const ipponY = stageHeight - ippponOffsetY;
 
-    const shiaijoCircleWidth = 35*  ratioX
+    const pointsOffsetY = ipponY - ipponWidth -5*ratioX;
+
+
+    const shiaijoCircleWidth = 55*  ratioX
     const shiaijoCirclePadding = 10*  ratioX
 
     const imageProps = {
@@ -56,10 +76,7 @@ const Shiaijo = (props: { data: Match|TeamMatch }) => {
         height: overlayHeight
     }
 
-    const konvaLayer = useRef<any>()
-    //const textWidth = konvaLayer.current?.getContext().measureText("some text").width;
-
-    let textNameWidth, textNumberWidth = 0;
+    let textNameWidth, textNumberWidth, textTeamWidth = 0;
     const g = konvaLayer.current?.getContext();
     if (g) {
         g.font = fontSizeName + 'px sans-serif';
@@ -67,10 +84,12 @@ const Shiaijo = (props: { data: Match|TeamMatch }) => {
         
         g.font = fontSizeNumber + 'px bold sans-serif';
         textNumberWidth = g.measureText(data.NumberTareRed).width
+
+        g.font = fontSizeTeam + 'px bold sans-serif';
+        textTeamWidth = g.measureText(data.TeamRed).width
     }
 
-    const middle = stageWidth / 2;
-    const ipponY = stageHeight - offsetY;
+   
     const ipponParams:TextConfig = {
         fill: "#000",
         fontSize: ipponFontSize,
@@ -83,7 +102,7 @@ const Shiaijo = (props: { data: Match|TeamMatch }) => {
 
     const ipponsWhite: TextConfig[] = [data.IpponWhite1, data.IpponWhite2, data.HansokuWhite].filter((hit) => hit).map((hit, i) => {
         return {
-            x: middle - ((ipponWidth * i) + ipponWidth + (i * ipponPaddingX) + ipponPaddingX),
+            x: middle - ((ipponWidth * i) + ipponWidth + (i * ipponPaddingX) + ipponPaddingX* 2),
             y: ipponY,
             text: hit,
             ...ipponParams
@@ -91,25 +110,47 @@ const Shiaijo = (props: { data: Match|TeamMatch }) => {
     });
     const ipponsRed: TextConfig[] = [data.IpponRed1, data.IpponRed2, data.HansokuRed].filter((hit) => hit).map((hit, i) => {
         return {
-            x: middle + (ipponWidth * i) + (i * ipponPaddingX) + ipponPaddingX,
+            x: middle + (ipponWidth * i) + (i * ipponPaddingX) + ipponPaddingX *2,
             y: ipponY,
             text: hit,
             ...ipponParams
         }
     });
 
+    const pointsWhite: TextConfig[] = [data.SetWhite, data.WinsWhite].filter((hit) => hit).map((hit, i) => {
+        return {
+            x: middle - ((ipponWidth * i) + ipponWidth + (i * ipponPaddingX) + ipponPaddingX * 2),
+            y: pointsOffsetY,
+            text: hit,
+            type: i > 0 ? 'rounded' : 'circle',
+            radius: 8 * ratioX,
+            ...ipponParams
+        }
+    });
+    const pointsRed: TextConfig[] = [data.SetRed, data.WinsRed].filter((hit) => hit).map((hit, i) => {
+        return {
+            x: middle + (ipponWidth * i) + (i * ipponPaddingX) + ipponPaddingX * 2,
+            y: pointsOffsetY,
+            text: hit,
+            type: i > 0 ? 'rounded' : 'circle',
+            radius: 8 * ratioX,
+            ...ipponParams
+        }
+    });
+
+
     const shadowParams = {
         shadowColor: 'black',
-            shadowBlur: 0.5,
-            shadowOffset: { x: 1.5, y: 1.5 },
-            shadowOpacity: 0.5
+        shadowBlur: 0.5,
+        shadowOffset: { x: 1.5, y: 1.5 },
+        shadowOpacity: 0.5
     }
 
     const texts: TextConfig[] = [
 
         // RED
         {
-            x: stageWidth - offsetX - textNameWidth,
+            x: stageWidth - nameOffsetX - textNameWidth,
             y: stageHeight - offsetY,
             text: data.NameTareRed,
             fontSize: fontSizeName,
@@ -126,11 +167,20 @@ const Shiaijo = (props: { data: Match|TeamMatch }) => {
             fill: '#fff',
             ...shadowParams
         },
+        {
+            x: stageWidth - numberOffsetX - textTeamWidth,
+            y: stageHeight - offsetY - 40 * ratioX,
+            text: data.TeamRed,
+            fontSize: fontSizeNumber,
+            fontStyle: "bold",
+            fill: '#fff',
+            ...shadowParams
+        },
 
 
         // WHITE
         {
-            x: offsetX,
+            x: nameOffsetX,
             y: stageHeight - offsetY,
             text: data.NameTareWhite,
             fontSize: fontSizeName,
@@ -145,6 +195,15 @@ const Shiaijo = (props: { data: Match|TeamMatch }) => {
             fontStyle: "bold",
             fill: '#fff',
             ...shadowParams
+        },
+        {
+            x: numberOffsetX,
+            y: stageHeight - offsetY -40 * ratioX,
+            text: data.TeamWhite,
+            fontSize: fontSizeNumber,
+            fontStyle: "bold",
+            fill: '#fff',
+            ...shadowParams
         }
     ];
 
@@ -153,25 +212,18 @@ const Shiaijo = (props: { data: Match|TeamMatch }) => {
         <div className="h-100" ref={targetRef}>
             <Stage width={width} height={height}>
                 <Layer>
-                    <Rect x={0} y={shiaijoCirclePadding} width={160*ratioX} height={30*ratioX} stroke="#000" strokeWidth={1} fill="#fff"></Rect>
+                    <Rect x={0} y={shiaijoCirclePadding} width={(data.FightNumber ? 220 : 160)*ratioX} height={30*ratioX} stroke="#000" strokeWidth={1} fill="#fff"></Rect>
                     <Text fontSize={20*ratioX} x={shiaijoCirclePadding} y={shiaijoCirclePadding+5*ratioX} text={"Fight "+data.Fight}></Text>
                     <Text fontSize={20*ratioX} x={shiaijoCirclePadding + 80*ratioX} y={shiaijoCirclePadding+5*ratioX} text={"Pool "+data.Pool}></Text>
+                    {data.FightNumber && <Text fontSize={20*ratioX} x={shiaijoCirclePadding + 160*ratioX} y={shiaijoCirclePadding+5*ratioX} text={"# "+data.FightNumber}></Text>}
                 </Layer>
 
                 <Layer>
-                    <Circle x={stageWidth - shiaijoCirclePadding - shiaijoCircleWidth} y={shiaijoCirclePadding} width={shiaijoCircleWidth} height={shiaijoCircleWidth}
-                        fill="#fff" strokeWidth={3} stroke="#000"
-                        offsetX={-shiaijoCircleWidth / 2}
-                        offsetY={-shiaijoCircleWidth / 2}
-                        
-                    ></Circle>
-                    <Text text={data.Shiaijo} x={stageWidth - shiaijoCirclePadding - shiaijoCircleWidth}
-                        y={shiaijoCirclePadding+2} fontSize={shiaijoCircleWidth*0.8}
+                    <CircleText text={data.Shiaijo}
+                        x={stageWidth - shiaijoCirclePadding - shiaijoCircleWidth}
+                        y={shiaijoCirclePadding}
                         width={shiaijoCircleWidth}
-                        height={shiaijoCircleWidth}
-                        align="center"
-                        verticalAlign="middle"
-                        fontStyle="bold"></Text>
+                        height={shiaijoCircleWidth}></CircleText>
                 </Layer>
 
                 <Layer ref={konvaLayer}>
@@ -179,9 +231,21 @@ const Shiaijo = (props: { data: Match|TeamMatch }) => {
                 </Layer>
 
                 <Layer>
+                    {data.TeamHikiwake && <RoundedCorner text={data.TeamHikiwake}
+                        x={middle - ipponWidth / 2}
+                        y={pointsOffsetY}
+                        width={ipponWidth}
+                        height={ipponWidth}
+                        border={ipponBorder}
+                        radius={8 * ratioX}></RoundedCorner>}
+
                     {texts.map((textProps, i) => <Text key={i} {...textProps} ></Text>)}
                     <Ippons items={ipponsWhite} width={ipponWidth} border={ipponBorder}></Ippons>
                     <Ippons items={ipponsRed} width={ipponWidth} border={ipponBorder}></Ippons>
+                    
+                    
+                    <Ippons items={pointsWhite} width={ipponWidth} border={ipponBorder}></Ippons>
+                    <Ippons items={pointsRed} width={ipponWidth} border={ipponBorder}></Ippons>
                 </Layer>
             </Stage>
         </div>
