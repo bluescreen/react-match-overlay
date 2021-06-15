@@ -24,19 +24,6 @@ const Shiaijo = (props: { data: any }) => {
     const konvaLayer = useRef<any>()
     const data = props.data;
 
-   
-    /*
-    data.TeamRed = "Germany"
-    data.TeamWhite = "Austria"
-    data.FightNumber = 5;
-    data.SetWhite = 3;
-    data.WinsWhite = 1;
-    data.SetRed = 4;
-    data.WinsRed = 2;
-    data.TeamHikiwake = 1;
-    */
-    
-
     useEffect(() => {    
         const imageObj: HTMLImageElement = new window.Image();
         imageObj.src = "/trans_overlay_1.png";
@@ -95,7 +82,7 @@ const Shiaijo = (props: { data: any }) => {
         height: overlayHeight
     }
 
-    const flagWidth = 80 * ratioX;
+    const flagWidth = 60 * ratioX;
     const flagHeight = 40 * ratioX;
     const flagY = stageHeight - offsetY - 90 * ratioX;
 

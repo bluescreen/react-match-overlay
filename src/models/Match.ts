@@ -6,7 +6,8 @@ enum Ippon {
 	Empty = "O",
 	Hansoku = "h",
 	HansokuNikai = "H",
-	C = "C"
+	Chusen = "C",
+	Hantei = "Ht"
 }
 
 enum Encho{

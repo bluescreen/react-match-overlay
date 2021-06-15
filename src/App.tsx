@@ -30,12 +30,11 @@ function App() {
 
           <div className="h-100">
             <FirestoreCollection path={"matches"}>
-
+              
               {(data) => (
                 <Switch>
                   <Route path="/table">
                     <div className="container">
-                      <h1 className="my-4">Active Matches</h1>
                       <MatchTable matches={data.value}></MatchTable>
                     </div>
                   </Route>

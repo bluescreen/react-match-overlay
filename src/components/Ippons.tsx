@@ -11,7 +11,7 @@ const Ippons = (props: { items: TextConfig[], width: number, border: number }) =
     {props.items.map((textProps: TextConfig, i: number) =>
       textProps.text === 'h' ?
         <>
-          <RegularPolygon fill="#000" x={textProps.x} y={textProps.y} offsetX={-ipponWidth / 2} offsetY={(-ipponWidth / 2)-hansokuWidth*0.2}  sides={3} radius={hansokuWidth}></RegularPolygon>
+          <RegularPolygon fill="#f00" x={textProps.x} y={textProps.y} offsetX={-ipponWidth / 2} offsetY={(-ipponWidth / 2)-hansokuWidth*0.2}  sides={3} radius={hansokuWidth}></RegularPolygon>
         </>
         :
         <>
