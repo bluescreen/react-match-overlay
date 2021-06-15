@@ -24,7 +24,7 @@ const Ippons = (props: { items: TextConfig[], width: number, border: number }) =
               offsetX={-ipponWidth / 2}
               offsetY={-ipponWidth / 2} y={textProps.y} width={ipponWidth}
               height={ipponWidth} stroke="#000" strokeWidth={ipponBorder} fill="#fff"></Circle>}
-          <Text key={i} {...textProps} ></Text>
+            <Text key={i} {...textProps} ></Text>
         </>)}
     </>  
 }

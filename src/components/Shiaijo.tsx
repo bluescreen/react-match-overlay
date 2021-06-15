@@ -260,13 +260,26 @@ const Shiaijo = (props: { data: any }) => {
                 </Layer>
 
                 <Layer>
-                    {data.TeamHikiwake && <RoundedCorner text={data.TeamHikiwake}
+                    {data.TeamEnchoOrHikiwake &&
+                    
+                        (data.TeamEnchoOrHikiwake === 'X'
+                        ? <Text text="&#x2715;"
+                            x={middle - ipponWidth / 2}
+                            y={pointsOffsetY}
+                            fontSize={30 * ratioX}
+                            height={ipponWidth}
+                            width={ipponWidth}
+                            align="center"
+                            verticalAlign="middle"
+                            fontStyle="bold"
+                        ></Text>
+                        : <RoundedCorner text={data.TeamEnchoOrHikiwake} 
                         x={middle - ipponWidth / 2}
                         y={pointsOffsetY}
                         width={ipponWidth}
                         height={ipponWidth}
                         border={ipponBorder}
-                        radius={8 * ratioX}></RoundedCorner>}
+                        radius={8 * ratioX}></RoundedCorner>)}
                     
                     
                     <Image {...imageFlagWhiteProps}></Image>
