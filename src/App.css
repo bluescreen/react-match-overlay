@@ -5,10 +5,24 @@
   text-align:center;
   align-items: center;
   justify-content: center;
-  width:50px;
-  height:50px;
+  width:40px;
+  height:40px;
   margin-right:4px;
   border-radius: 60px;
+}
+.hansoku, .hikiwake{
+  display:flex;
+  text-align:center;
+  align-items: center;
+  justify-content: center;
+  width:40px;
+  height:40px;
+  margin-right:4px;
+  font-size:30px;
+  color:#f00;
+}
+.hikiwake{
+  color:#000;
 }
 
 .shiaijo{

@@ -30,7 +30,9 @@ const Shiaijo = (props: { data: any }) => {
         imageObj.onload = () => {
             setImage(imageObj as any)
         }
+    }, [])
 
+    useEffect(() => {    
         const flagRed: HTMLImageElement = new window.Image();
         flagRed.src = mapNumberToFlag(data.NumberTareRed);
         flagRed.onload = () => {
@@ -42,7 +44,7 @@ const Shiaijo = (props: { data: any }) => {
         flagWhite.onload = () => {
             setImageFlagWhite(flagWhite as any)
         }
-    }, [])
+    }, [data.NumberTareRed, data.NumberTareWhite])
 
     const stageWidth = width ?? 0;
     const stageHeight = height ?? 0;
@@ -265,6 +267,7 @@ const Shiaijo = (props: { data: any }) => {
                         height={ipponWidth}
                         border={ipponBorder}
                         radius={8 * ratioX}></RoundedCorner>}
+                    
                     
                     <Image {...imageFlagWhiteProps}></Image>
                     <Image {...imageFlagRedProps}></Image>

@@ -47,8 +47,8 @@ const MatchTable = (props: {matches: Match[]}) => {
                             <Score hits={[row.IpponWhite1, row.IpponWhite2, row.HansokuWhite]}></Score>
                         </td>
                         <td className="text-center">
-                            {row.EnchoOrHikiwake > 0 && <span className="score rounded-2">{row.EnchoOrHikiwake}</span>}
-                            {row.TeamEnchoOrHikiwake > 0 && <span className="score rounded-2">{row.TeamEnchoOrHikiwake}</span>}
+                            {row.EnchoOrHikiwake && (row.EnchoOrHikiwake == 'X' ?<span className="hikiwake">&#x2715;</span> : <span className="score rounded-2">{row.EnchoOrHikiwake}</span>)}
+                            {row.TeamEnchoOrHikiwake && (row.TeamEnchoOrHikiwake == 'X' ?<span className="hikiwake">&#x2715;</span> : <span className="score rounded-2">{row.TeamEnchoOrHikiwake}</span>)}
                         </td>
                         <td>
                             <Score hits={[row.IpponRed1, row.IpponRed2, row.HansokuRed]}></Score>
