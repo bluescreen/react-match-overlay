@@ -1,7 +1,8 @@
-import ScoreEdit from './Score'
+import ScoreEdit from './ScoreEdit'
 import TareNumberEdit from './TareNumberEdit'
 import { useState } from 'react';
 import NumberInput from './NumberInput';
+import EnchoOrHikiwake from './EnchoOrHikiwake';
 
 
 const MatchEditRow = (props: any) => {
@@ -15,10 +16,24 @@ const MatchEditRow = (props: any) => {
     });
   }
 
+  const updateScore = (hitlist: string[], color: string) => {
+    const ippons = hitlist.filter((hit) => hit !== 'h')
+    const hansoku = hitlist.filter((hit) => hit === 'h')
+
+    const newScore = {
+      ["Ippon"+color+"1"]: ippons[0] ?? '',
+      ["Ippon"+color+"2"]: ippons[1] ?? '',
+      ["Hansoku"+color]: hansoku[0] ?? ''
+    }
+    setData((prevState: any) => {
+      return { ...prevState, ...newScore }
+    });
+  }
+
   return (
     <>
       <td>
-        <button onClick={(e) => props.onSave(e, data)} className="btn btn-success">Save</button>
+        <button onClick={(e) => props.onSave(e, data)} className="btn btn-light">💾</button>
       </td>
       <td>{row.Shiaijo}</td>
       <td><NumberInput value={data.Fight} onChange={(e:any) => update("Fight", e.target.value)}></NumberInput></td>
@@ -32,14 +47,14 @@ const MatchEditRow = (props: any) => {
       <td className="points-td"><NumberInput value={data.WinsWhite} onChange={(e:any) => update("WinsWhite", e.target.value)}></NumberInput></td>
       <td><NumberInput value={data.SetWhite} onChange={(e:any) => update("SetWhite", e.target.value)}></NumberInput></td>
       <td className="score-td">
-        <ScoreEdit hits={[row.IpponWhite1, row.IpponWhite2, row.HansokuWhite]}></ScoreEdit>
+        <ScoreEdit hits={[row.IpponWhite1, row.IpponWhite2, row.HansokuWhite]} onChange={(hits: string[]) => updateScore(hits, "White")}></ScoreEdit>
       </td>
       <td className="text-center">
-        {row.EnchoOrHikiwake && (row.EnchoOrHikiwake === 'X' ? <span className="hikiwake">&#x2715;</span> : <span className="score rounded-2">{row.EnchoOrHikiwake}</span>)}
-        {row.TeamEnchoOrHikiwake && (row.TeamEnchoOrHikiwake === 'X' ? <span className="hikiwake">&#x2715;</span> : <span className="score rounded-2">{row.TeamEnchoOrHikiwake}</span>)}
+        <EnchoOrHikiwake value={row.EnchoOrHikiwake} onChange={(e:any) => update("EnchoOrHikiwake", e.target.value)}></EnchoOrHikiwake>
+        {/**<NumberInput value={row.TeamEnchoOrHikiwake} onChange={(e:any) => update("TeamEnchoOrHikiwake", e.target.value)}></NumberInput>**/}
       </td>
       <td className="score-td">
-        <ScoreEdit hits={[row.IpponRed1, row.IpponRed2, row.HansokuRed]}></ScoreEdit>
+        <ScoreEdit hits={[row.IpponRed1, row.IpponRed2, row.HansokuRed]}  onChange={(hits: string[]) => updateScore(hits, "Red")}></ScoreEdit>
       </td>
       <td><NumberInput value={data.SetRed} onChange={(e:any) => update("SetRed", e.target.value)}></NumberInput></td>
       <td className="points-td"><NumberInput value={data.WinsRed} onChange={(e:any) => update("WinsRed", e.target.value)}></NumberInput></td>

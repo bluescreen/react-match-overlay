@@ -29,3 +29,4 @@ src/config.ts
 .github
 .firebaserc
 firebase.json
+docs

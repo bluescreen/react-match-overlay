@@ -30,9 +30,7 @@
   cursor: pointer;
 }
 
-.table-hover{
-  cursor: pointer;
-}
+
 
 .match-table{
   white-space: nowrap;
@@ -88,4 +86,10 @@ html, body, #root {
 .points-td{
   border-left: 1px solid #000;
   border-right: 1px solid #000;
+}
+.btn:disabled{
+  cursor: not-allowed;
+}
+.score-btn:hover {
+  cursor: no-drop;
 }
