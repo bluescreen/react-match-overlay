@@ -146,7 +146,7 @@ const Shiaijo = (props: { data: any }) => {
         }
     });
 
-    const pointsWhite: TextConfig[] = [data.SetWhite, data.WinsWhite].filter((hit) => hit).map((hit, i) => {
+    const pointsWhite: TextConfig[] = [data.SetWhite, data.WinsWhite].filter((hit) => hit > 0).map((hit, i) => {
         return {
             x: middle - ((ipponWidth * i) + ipponWidth + (i * ipponPaddingX) + ipponPaddingX * 2),
             y: pointsOffsetY,
@@ -156,7 +156,7 @@ const Shiaijo = (props: { data: any }) => {
             ...ipponParams
         }
     });
-    const pointsRed: TextConfig[] = [data.SetRed, data.WinsRed].filter((hit) => hit).map((hit, i) => {
+    const pointsRed: TextConfig[] = [data.SetRed, data.WinsRed].filter((hit) => hit > 0).map((hit, i) => {
         return {
             x: middle + (ipponWidth * i) + (i * ipponPaddingX) + ipponPaddingX * 2,
             y: pointsOffsetY,
@@ -260,7 +260,7 @@ const Shiaijo = (props: { data: any }) => {
                 </Layer>
 
                 <Layer>
-                    {data.TeamEnchoOrHikiwake &&
+                    {data.TeamEnchoOrHikiwake && data.TeamEnchoOrHikiwake != " " &&
                     
                         (data.TeamEnchoOrHikiwake === 'X'
                         ? <Text text="&#x2715;"

@@ -2,11 +2,11 @@ import Score from './Score'
 import { mapNumberToFlag } from '../helpers'
 
 
-const MatchRow = (props: any) => {
+const MatchRow = (props: { row: any, onEdit: any}) => {
   const row = props.row;
   return (
     <>
-      <td></td>
+      <td><button className="btn btn-light btn-sm" style={{fontSize:20}} onClick={props.onEdit}>&#9998;</button></td>
       <td>{row.Shiaijo}</td>
       <td>{row.Fight}</td>
       <td>{row.FightNumber}</td>
@@ -32,7 +32,9 @@ const MatchRow = (props: any) => {
 
       <td style={{width:40}}><img alt="" width={40} src={mapNumberToFlag(row.NumberTareRed, 'round', 'png')} /></td>
       <td><b>{row.NumberTareRed}</b><br />{row.NameTareRed}</td>
-      <td><img width={20} src={row.Visible ? "/visible.png" : "/hidden.png"}></img></td>
+      {/**<td className="toggle-visible">
+        <img width={20} src={row.Visible ? "/visible.png" : "/hidden.png"} />
+  </td>**/}
     </>
   )
 }

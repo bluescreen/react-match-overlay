@@ -93,3 +93,6 @@ html, body, #root {
 .score-btn:hover {
   cursor: no-drop;
 }
+.toggle-visible{
+  cursor: pointer;
+}
