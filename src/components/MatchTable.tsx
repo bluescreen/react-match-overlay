@@ -50,6 +50,7 @@ const MatchTable = (props: { matches: Match[], keys: string[] }) => {
                     <th>Set</th>
                     <th>Win</th>
                     <th className="row-auto" colSpan={2}>Name Red</th>
+                    <th>Done</th>
                     {/**<th>Visible</th>**/}
                 </tr>
             </thead>

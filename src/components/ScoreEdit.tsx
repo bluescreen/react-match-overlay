@@ -42,6 +42,10 @@ const ScoreEdit = (props: { hits: any[], onChange: any }) => {
         
     }
 
+    const resetIppons = () => {
+        setHitList([]);
+    }
+
     useEffect(() => {
         props.onChange(histlist);
     }, [histlist])
@@ -57,9 +61,12 @@ const ScoreEdit = (props: { hits: any[], onChange: any }) => {
             <div className="btn-group mb-2 me-1">
                 <button title="Hansoku" onClick={() => addIppon('h')} className="btn btn-danger btn-sm" disabled={maxIpponsReached}>&#x25B2;</button>
             </div>
-            <div className="btn-group mb-2">
+            <div className="btn-group mb-2 me-1">
                 <button title="Chusen" onClick={() => addIppon('C')} className="btn btn-secondary btn-sm" disabled={maxIpponsReached}>C</button>
                 <button title="Fusen Gachi" onClick={() => addIppon('O')} className="btn btn-secondary btn-sm" disabled={maxIpponsReached}>O</button>
+            </div>
+            <div className="btn-group mb-2">
+                <button title="Reset" onClick={resetIppons} className="btn btn-primary btn-sm">&#x21bb;</button>
             </div>
             <div className="d-flex">
                 {histlist && histlist.map((hit: string, n: number) =>
