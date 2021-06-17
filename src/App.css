@@ -35,8 +35,10 @@
 }
 
 .match-table{
-  font-size: 150%;
   white-space: nowrap;
+}
+.match-table td{
+  vertical-align: center;
 }
 
 a{
@@ -76,4 +78,14 @@ html, body, #root {
 }
 .event-log{
   height:150px;
+}
+
+.score-td{
+  width:150px;
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
+}
+.points-td{
+  border-left: 1px solid #000;
+  border-right: 1px solid #000;
 }

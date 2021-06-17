@@ -1,4 +1,4 @@
-const Score = (props: { hits: any[] }) => {
+const ScoreEdit = (props: { hits: any[] }) => {
     return (
         <div className="d-flex">
             {props.hits && props.hits.map((hit: string, n: number) =>
@@ -6,4 +6,4 @@ const Score = (props: { hits: any[] }) => {
         </div>
     )
 }
-export default Score;
+export default ScoreEdit;

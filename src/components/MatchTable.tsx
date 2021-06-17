@@ -11,9 +11,6 @@ import { FirestoreMutation } from "@react-firebase/firestore";
 const MatchTable = (props: { matches: Match[], keys: string[] }) => {
     const [edit, setEdit] = useState<string | null>(null);
     const history = useHistory();
-
-    console.log(props.matches);
-
     
     const onEditClick = (e: any, shiaijo: string) => {
         e.preventDefault();
@@ -22,18 +19,16 @@ const MatchTable = (props: { matches: Match[], keys: string[] }) => {
 
     const onSaveClick = (e: any, runMutation: any, row: any) => {
         e.preventDefault();
-        console.log("update", row)
-
         runMutation(row).then((res: any) => {
             setEdit(null)
           });
     }
 
     return (
-        <table className="match-table table table-striped table-hover" key="table">
+        <table className="match-table table table-striped table-condensed table-hover" key="table">
             <thead>
                 <tr>
-                    <th>#</th>
+                    <th colSpan={2}>#</th>
                     <th>Fight</th>
                     <th>No</th>
                     <th>Pool</th>
@@ -41,7 +36,8 @@ const MatchTable = (props: { matches: Match[], keys: string[] }) => {
                     <th className="row-auto text-end" colSpan={3}>Points White</th>
                     <th></th>
                     <th className="row-auto" colSpan={3}>Points Red</th>
-                    <th className="row-auto" colSpan={5}>Name Red</th>
+                    <th className="row-auto">Name Red</th>
+                    <th>Visible</th>
                 </tr>
             </thead>
             <tbody>
