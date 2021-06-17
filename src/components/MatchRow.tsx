@@ -33,7 +33,6 @@ const MatchRow = (props: any) => {
       <td><img alt="" width={40} src={mapNumberToFlag(row.NumberTareRed, 'round', 'png')} /></td>
       <td>{row.NumberTareRed}</td>
       <td>{row.NameTareRed}</td>
-      <td><button onClick={(e) => props.onEdit(e,row.Shiaijo)} className="btn btn-primary btn-xs">Edit</button></td>
     </>
   )
 }

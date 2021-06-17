@@ -9,3 +9,4 @@ export const mapNumberToFlag = (tareNumber: string, type:string = 'big', fileExt
 
   return "/flags/"+type+"/"+entryName+"."+fileExt
 }
+

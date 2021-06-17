@@ -15,11 +15,6 @@ const MatchTable = (props: { matches: Match[], keys: string[] }) => {
     console.log(props.matches);
 
     
-    const onRowClick = (e: any, shiaijo: string) => {
-        e.preventDefault();
-        history.push('/shiaijo/' + shiaijo)
-    }
-
     const onEditClick = (e: any, shiaijo: string) => {
         e.preventDefault();
         setEdit(shiaijo)

@@ -1,4 +1,5 @@
 import Score from './Score'
+import NumberEdit from './NumberEdit'
 import { mapNumberToFlag } from '../helpers'
 import { useState } from 'react';
 
@@ -7,22 +8,25 @@ const MatchEditRow = (props: any) => {
   const row = props.row;
   const [data, setData] = useState(props.row)
 
-  const update = (field: string, e: any) => {
-    console.log(field, e.target.value)
+  const update = (field: string, value: any) => {
+    console.log(field, value)
     setData((prevState: any) => {
-      return { ...prevState, [field]: e.target.value }
+      return { ...prevState, [field]: value }
     });
   }
 
   return (
     <>
+      <td>
+        <button onClick={(e) => props.onSave(e, data)} className="btn btn-success">Save</button>
+      </td>
       <td>{row.Shiaijo}</td>
       <td>{row.Fight}</td>
       <td>{row.FightNumber}</td>
       <td>{row.Pool}</td>
       <td><img alt="" width={40} src={mapNumberToFlag(row.NumberTareWhite, 'round', 'png')} /></td>
-      <td><input type="text" className="form-control" value={data.NumberTareWhite} onChange={(e) => update("NumberTareWhite", e)} ></input></td>
-      <td><input type="text" className="form-control" value={data.NameTareWhite} onChange={(e) => update("NameTareWhite", e)}></input></td>
+      <td><NumberEdit value={data.NumberTareWhite} onChange={(value: any) => update("NumberTareWhite", value)}></NumberEdit></td>
+      <td><input style={{width:120}}  type="text" className="form-control" value={data.NameTareWhite} onChange={(e) => update("NameTareWhite", e.target.value)}></input></td>
 
       <td>{row.WinsWhite > 0 && <span className="score rounded-2">{row.WinsWhite}</span>}</td>
       <td>{row.SetWhite > 0 && <span className="score">{row.SetWhite}</span>}</td>
@@ -41,11 +45,9 @@ const MatchEditRow = (props: any) => {
 
 
       <td><img alt="" width={40} src={mapNumberToFlag(row.NumberTareRed, 'round', 'png')} /></td>
-      <td><input type="text" className="form-control" value={data.NumberTareRed} onChange={(e) => update("NumberTareRed", e)}></input></td>
-      <td><input type="text" className="form-control" value={data.NameTareRed} onChange={(e) => update("NameTareRed", e)}></input></td>
-      <td>
-        <button onClick={(e) => props.onSave(e, data)} className="btn btn-success">Save</button>
-      </td>
+      <td><NumberEdit value={data.NumberTareRed} onChange={(value: any) => update("NumberTareRed", value)}></NumberEdit></td>
+      <td><input style={{width:120}} type="text" className="form-control" value={data.NameTareRed} onChange={(e) => update("NameTareRed", e.target.value)}></input></td>
+      
     </>
   )
 }
