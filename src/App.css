@@ -1,24 +1,26 @@
 
 .score{
-  border:1px solid #000;
+  border:2px solid #000;
   display:flex;
   text-align:center;
   align-items: center;
   justify-content: center;
-  width:40px;
-  height:40px;
+  width:30px;
+  height:30px;
   margin-right:4px;
   border-radius: 60px;
+  background: #fff;
+  font-weight:bold
 }
 .hansoku, .hikiwake{
   display:flex;
   text-align:center;
   align-items: center;
   justify-content: center;
-  width:40px;
-  height:40px;
+  width:30px;
+  height:30px;
   margin-right:4px;
-  font-size:30px;
+  font-size:25px;
   color:#f00;
 }
 .hikiwake{
@@ -33,9 +35,11 @@
 
 
 .match-table{
+  font-size:80%;
   white-space: nowrap;
 }
 .match-table td{
+  padding:3px;
   vertical-align: center;
 }
 
@@ -95,4 +99,8 @@ html, body, #root {
 }
 .toggle-visible{
   cursor: pointer;
+}
+
+input.form-control{
+  padding:2px;
 }
