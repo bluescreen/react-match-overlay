@@ -35,7 +35,7 @@ function App() {
                 <Switch>
                   <Route path="/table">
                     <div className="container">
-                      <MatchTable matches={data.value}></MatchTable>
+                      <MatchTable matches={data.value} keys={ data.ids}></MatchTable>
                     </div>
                   </Route>
 
